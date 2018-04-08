@@ -1,0 +1,25 @@
+# environment variables for any dev environment
+version: '3'
+
+services:
+  # service name has to be environment-unique, else one startup will shutdown others
+  local-chat-server:
+    labels:
+      de.otto.template.description: "Chat Server for local environment"
+      de.otto.drop.brandshopupdater.version: "local"
+    image: "chat-server:local"
+    build:
+      context: ../..
+      dockerfile: ./docker/Dockerfile
+    ports:
+      - "8200:8200" # web port
+    environment:
+      PROFILE: "local"
+      OTTO_GROUP: "local"
+    networks:
+      - learn-ms-network
+
+networks:
+  learn-ms-network:
+    external: true
+
