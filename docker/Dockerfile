@@ -17,7 +17,7 @@ ENV SECURITY_JWT_SECRET=""
 # create user with defined user-id and set rights to volume for user
 RUN adduser -D -u 1000 app && echo "app:ppa" | chpasswd
 
-COPY docker/run.sh /run.sh
+COPY ./docker/run.sh /run.sh
 
 RUN chmod 700 /*.sh
 
@@ -27,6 +27,6 @@ WORKDIR /app
 # run rest of container with user app
 USER app
 
-COPY build/libs/*.jar /app/app.jar
+COPY ./build/libs/*.jar /app/app.jar
 
 ENTRYPOINT /run.sh $PROFILE $JAVA_HEAP
