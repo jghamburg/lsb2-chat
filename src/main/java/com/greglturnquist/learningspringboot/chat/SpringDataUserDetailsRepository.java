@@ -37,8 +37,7 @@ public class SpringDataUserDetailsRepository implements ReactiveUserDetailsServi
   @Override
   public Mono<UserDetails> findByUsername(String username) {
     return repository.findByUsername(username)
-        .map(user -> User.withDefaultPasswordEncoder()
-            .username(user.getUsername())
+        .map(user -> User.withUsername(user.getUsername())
             .password(user.getPassword())
             .authorities(user.getRoles())
             .build());
