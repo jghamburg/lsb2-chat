@@ -9,14 +9,14 @@ import org.springframework.web.filter.reactive.HiddenHttpMethodFilter;
 @SpringCloudApplication
 public class LearningSpringBootChatApplication {
 
-	public static void main(String[] args) {
-		SpringApplication.run(
-			LearningSpringBootChatApplication.class, args);
-	}
+  public static void main(String[] args) {
+    SpringApplication.run(
+        LearningSpringBootChatApplication.class, args);
+  }
 
-	@Bean
-	HiddenHttpMethodFilter hiddenHttpMethodFilter() {
-		return new HiddenHttpMethodFilter();
-	}
+  @Bean
+  HiddenHttpMethodFilter hiddenHttpMethodFilter() {
+    return new HiddenHttpMethodFilter();
+  }
 }
 // end::code[]
