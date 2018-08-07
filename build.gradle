@@ -1,6 +1,6 @@
 buildscript {
 	ext {
-		springBootVersion = '2.0.3.RELEASE'
+		springBootVersion = '2.0.4.RELEASE'
 		springCloudVersion = 'Finchley.RELEASE'
 		springCloudK8sVersion = '0.2.0.RELEASE'
 	}
@@ -88,8 +88,6 @@ dependencies {
 	// tag::zuul[]
 	compile('org.springframework.cloud:spring-cloud-starter-gateway')
 	// end::zuul[]
-	compile("org.springframework.cloud:spring-cloud-starter-kubernetes:${springCloudK8sVersion}")
-
 	testCompile('org.springframework.boot:spring-boot-starter-test')
 }
 

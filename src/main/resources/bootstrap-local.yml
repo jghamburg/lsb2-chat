@@ -5,4 +5,4 @@ spring:
     config:
       label: session
       password: password
-      uri: http://localhost:8888
+      uri: http://local-config-server:8888

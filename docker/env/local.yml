@@ -15,7 +15,6 @@ services:
       - "8200:8200" # web port
     environment:
       PROFILE: "local"
-      OTTO_GROUP: "local"
     networks:
       - learn-ms-network
 
