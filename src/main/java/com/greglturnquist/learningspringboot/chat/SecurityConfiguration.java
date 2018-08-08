@@ -33,6 +33,7 @@ public class SecurityConfiguration {
   SecurityWebFilterChain springWebFilterChain(ServerHttpSecurity http) {
     return http
         .authorizeExchange()
+        .pathMatchers("/actuator/*").permitAll()
         .pathMatchers("/**").authenticated()
         .and()
         .httpBasic()
