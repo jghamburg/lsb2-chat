@@ -56,7 +56,7 @@ jib {
     jvmFlags = ['-Xms512m', '-Xdebug', '-Xmy:flag=jib-rules']
     mainClass = 'com.greglturnquist.learningspringboot.chat.LearningSpringBootChatApplication'
     args = []
-    ports = ['1000']
+    ports = ['8080']
     format = 'OCI'
   }
 }
