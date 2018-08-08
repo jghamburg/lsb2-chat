@@ -18,7 +18,7 @@ plugins {
 	// tag::gradle-git[]
 	id "com.gorylenko.gradle-git-properties" version "1.4.17"
 	// end::gradle-git[]
-  id 'com.google.cloud.tools.jib' version '0.9.7'
+  id 'com.google.cloud.tools.jib' version '0.9.8'
 }
 
 apply plugin: 'java'
@@ -46,14 +46,14 @@ jar {
 
 jib {
   from {
-    image = 'docker.obc.ov.otto.de/base/openjdk-jre:8-alpine'
+    image = 'docker.obc.ov.otto.de/base/openjdk:8-jre-alpine'
   }
   to {
-    image = "docker.obc.ov.otto.de/jib/lsb2-chat"
+    image = "lsb2-chat:local"
 //    credHelper = 'osxkeychain'
   }
   container {
-    jvmFlags = ['-Xms512m', '-Xdebug', '-Xmy:flag=jib-rules']
+    jvmFlags = ['-Djava.security.egd=file:/dev/./urandom', '-Xms512m', '-Xdebug', "-Dspring.profiles.active=local"]
     mainClass = 'com.greglturnquist.learningspringboot.chat.LearningSpringBootChatApplication'
     args = []
     ports = ['8080']

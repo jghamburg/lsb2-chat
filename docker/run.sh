@@ -1,5 +1,5 @@
 #!/bin/sh
-profile="$1:-local"
+profile="$1"
 java_heap="${2:-768m}"
 
 echo "startup the container! find log in docker logs"
