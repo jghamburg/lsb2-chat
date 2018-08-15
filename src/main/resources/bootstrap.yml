@@ -3,6 +3,6 @@ spring:
     name: chat
   cloud:
     config:
-      label: session
+#      label: session
       password: password
       uri: http://localhost:8888
