@@ -12,7 +12,7 @@ services:
       context: ../..
       dockerfile: ./docker/Dockerfile
     ports:
-      - "8080:8080" # web port
+      - "9999:9999" # web port
     environment:
       PROFILE: "local"
     networks:

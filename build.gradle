@@ -84,6 +84,7 @@ jib {
 }
 
 configurations {
+	all*.exclude group: 'ch.qos.logback', module: 'logback-classic'
 	all*.exclude group: 'org.springframework.boot', module: 'spring-boot-starter-tomcat'
 	all*.exclude group: 'org.springframework', module: 'spring-webmvc'
 }
