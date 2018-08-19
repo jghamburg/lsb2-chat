@@ -26,9 +26,10 @@ repositories {
 	jcenter()
 }
 
-jar {
-	baseName = 'learning-spring-boot-chat'
-	version = '0.0.1-SNAPSHOT'
+bootJar {
+  baseName = 'learning-spring-boot-chat'
+  version = '0.0.1-SNAPSHOT'
+  excludeDevtools = false
 }
 /*
  * docker-compose plugin configuration.
