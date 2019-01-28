@@ -4,17 +4,21 @@
 
 Setting up gradle  
 add to build.gradle  
+
 ```groovy
 dependencies {
 	compile('org.springframework.boot:spring-boot-devtools')
 }
 ```
+
 add to application.yml  
+
 ```
 
 ```
 
 Setting up ide IntelliJ  
+
 ```
 -> Run Configuration -> Application  
 Main class: org.springframework.boot.devtools.RemoteSpringApplication

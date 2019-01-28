@@ -1,18 +1,8 @@
 # Build the final Image only with JRE and built App Jar
-FROM docker.obc.ov.otto.de/base/openjdk:8-jre-alpine
-MAINTAINER Joerg Gellien <joerg.gellien@otto.de>
-
-# set date
-RUN apk update && apk upgrade && \
-  apk add tzdata net-tools && \
-	cp /usr/share/zoneinfo/Europe/Berlin /etc/localtime && \
-	echo "Europe/Berlin" >  /etc/timezone && \
-	apk del tzdata
-# set date
+FROM openjdk:8-jre-alpine
 
 # service port from outside is important if we want to use eureka one time, then port mapping has to be 1:1
 ENV PROFILE default
-ENV TZ CET
 ENV SECURITY_JWT_SECRET=""
 
 # create user with defined user-id and set rights to volume for user
