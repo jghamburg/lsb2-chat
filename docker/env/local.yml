@@ -5,12 +5,14 @@ services:
   # service name has to be environment-unique, else one startup will shutdown others
   local-chat-server:
     labels:
-      de.otto.template.description: "Chat Server for local environment"
-      de.otto.drop.brandshopupdater.version: "local"
+      lsb2.template.description: "Chat Server for local environment"
+      lsb2.version: "local"
     image: "chat-server:local"
     build:
       context: ../..
       dockerfile: ./docker/Dockerfile
+      args:
+        JAR_FILE: ./build/libs/lsb2-chat.jar
     ports:
       - "9999:9999" # web port
       - "49999:49999"
