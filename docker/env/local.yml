@@ -15,11 +15,11 @@ services:
         JAR_FILE: ./build/libs/lsb2-chat.jar
     ports:
       - "9999:9999" # web port
-      - "49999:49999"
+      # - "49999:49999"
     environment:
       PROFILE: "local"
-      JAVA_REMOTE_DEBUGGING: "true"
       DEBUG_PORT: "49999"
+#      JAVA_REMOTE_DEBUGGING: "false"
     networks:
       - learn-ms-network
 
