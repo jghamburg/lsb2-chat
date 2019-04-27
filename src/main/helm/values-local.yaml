@@ -1,0 +1,12 @@
+image:
+  repository: jghamburg/lsb2-chat
+  tag: local
+  pullPolicy: IfNotPresent
+
+fullnameOverride: "lsb2-chat"
+
+service:
+  name: lsb2-chat
+  description: The lsb2 chat service
+  type: ClusterIP
+  port: 80

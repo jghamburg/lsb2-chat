@@ -1,5 +1,5 @@
 plugins {
-	id 'org.springframework.boot' version '2.1.2.RELEASE' apply true
+	id 'org.springframework.boot' version '2.1.4.RELEASE' apply true
   id "io.spring.dependency-management" version "1.0.6.RELEASE"
 	id 'java'
 	id 'io.franzbecker.gradle-lombok' version '2.0'
@@ -7,11 +7,14 @@ plugins {
 	id 'com.gorylenko.gradle-git-properties' version '2.0.0'
 	id 'com.avast.gradle.docker-compose' version '0.8.13'
 	id 'com.google.cloud.tools.jib' version '1.0.0'
+  id 'org.unbroken-dome.helm' version '0.3.1'
+  id 'org.unbroken-dome.helm-publish' version '0.3.1'
+  id 'org.unbroken-dome.helm-releases' version '0.3.1'
 }
 
 ext {
-	set('springCloudVersion', 'Greenwich.RELEASE')
 	set('activeSpringProfiles', 'local')
+  set('chartRepoUrl', 'http://chartmuseum.local.svc.cluster.local/')
 }
 
 group = 'com.gregturnquist.learningspringboot'
@@ -23,7 +26,7 @@ repositories {
 }
 
 dependencies {
-  implementation platform('org.springframework.cloud:spring-cloud-dependencies:Greenwich.RELEASE')
+  implementation platform('org.springframework.cloud:spring-cloud-dependencies:Greenwich.SR1')
 	implementation 'org.springframework.cloud:spring-cloud-starter-gateway'
 	implementation 'org.springframework.boot:spring-boot-starter-actuator'
 	implementation 'org.springframework.boot:spring-boot-starter-security'
@@ -42,8 +45,8 @@ dependencies {
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 }
 
-sourceCompatibility = 1.8
-targetCompatibility = 1.8
+sourceCompatibility = 11
+targetCompatibility = 11
 
 lombok {
 	version = '1.18.4'
@@ -58,6 +61,61 @@ bootJar {
   baseName = 'lsb2-chat'
   version = ''
   excludeDevtools = false
+}
+
+helm {
+  // basic helm plugin config
+  home = file("${project.buildDir}/helm/home")
+  outputDir = file("${project.buildDir}/helm")
+  // The global lint configuration applies to all charts
+  lint {
+      // treat linter warnings as errors (failing the build)
+      strict = false
+      enabled = true
+  }
+  filtering {
+    // This value will be resolvable in all charts' YAML files as ${authorName}
+    values.put 'authorName', 'Developer'
+  }
+// if the following section is commented out the implicit charts.main is injected
+//  charts {
+//    foo {
+//        chartName = project.name
+//        chartVersion = project.version.toString()
+//        sourceDir = file('src/main/helm')
+//    }
+//  }
+  repositories {
+      museum {
+//          url = uri('http://chartmuseum.local.svc.cluster.local/')
+          url = uri(chartRepoUrl)
+      }
+  }
+  // helm-release plugin config
+  releases {
+      'lsb2-chat' {
+          from charts.main
+          namespace = 'local'
+          replace = false
+          purge = true
+          dryRun = false
+          wait = false
+          // pass values (like --set on the command line)
+          values = [ 'rootUser.password': 'secret' ]
+          // pass value files (like -f on the command line)
+          valueFiles.from "src/main/helm/values.yaml"
+          valueFiles.from "src/main/helm/values-${activeSpringProfiles}.yaml"
+      }
+  }
+
+  // helm-publish plugin config
+  publishing {
+      repositories {
+          museum {
+              url = uri(chartRepoUrl)
+          }
+      }
+  }  
 }
 /*
  * docker-compose plugin configuration.

@@ -5,4 +5,4 @@ spring:
     config:
       label: session
       password: password
-      uri: ${CONFIG_SERVER_URI:http://localhost:8888}
+      uri: ${CONFIG_SERVER_URI:http://lsb2-config-server:8080}

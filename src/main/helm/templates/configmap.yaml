@@ -1,0 +1,23 @@
+# This is a simple example of using a config map to create a single page static site.
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ .Values.service.name  }}-config
+  labels:
+    app: {{ .Values.service.name }}
+    chart: {{ .Chart.Name }}-{{ .Chart.Version | replace "+" "_" }}
+    release: {{ .Release.Name }}
+    heritage: {{ .Release.Service }}
+data:
+  # When the config map is mounted as a volume, these will be created as files.
+  PORT: {{ .Values.app.port | quote }}
+  PROFILE: {{ .Values.app.profile }} 
+  CONFIG_SERVER_URI: {{ .Values.app.configserver.uri }}
+  EUREKA_SERVER_URI: {{ .Values.app.eurekaserver.uri }}
+  RABBITMQ_HOST: {{ .Values.app.rabbitmq.host }}
+  RABBITMG_PORT: {{ .Values.app.rabbitmq.port | quote }}
+  RABBITMG_USERNAME: {{ .Values.app.rabbitmq.username }}
+  RABBITMG_PASSWORD: {{ .Values.app.rabbitmq.password }}
+  MONGODB_HOST: {{ .Values.app.mongodb.host }}
+  MONGODB_PORT: {{ .Values.app.mongodb.port | quote }}
+  MONGODB_DB_NAME: {{ .Values.app.mongodb.dbname }}
