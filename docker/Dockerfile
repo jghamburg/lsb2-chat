@@ -1,4 +1,4 @@
-FROM azul/zulu-openjdk-alpine:11.0.2 as packager
+FROM azul/zulu-openjdk-alpine:11.0.3 as packager
 
 # First stage: JDK 11 with modules required for Spring Boot
 RUN /usr/lib/jvm/zulu-11/bin/jlink \

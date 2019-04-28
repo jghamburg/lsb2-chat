@@ -7,7 +7,7 @@ app:
   configserver:
     uri: 'http://lsb2-config-server'
   eurekaserver:
-    uri: 'http://user:password@lsb2-eureka-server'
+    uri: 'http://user:password@lsb2-eureka-server/eureka/'
   rabbitmq:
     host: local-rabbitmq
     port: 5672
@@ -28,7 +28,7 @@ nameOverride: ""
 fullnameOverride: "lsb2-chat"
 
 service:
-  name: chat-service
+  name: lsb2-chat
   description: The lsb2 chat service
   type: ClusterIP
   port: 80
