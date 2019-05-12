@@ -5,11 +5,19 @@ plugins {
 	id 'io.franzbecker.gradle-lombok' version '2.0'
 	id 'idea'
 	id 'com.gorylenko.gradle-git-properties' version '2.0.0'
+  
 	id 'com.avast.gradle.docker-compose' version '0.8.13'
 	id 'com.google.cloud.tools.jib' version '1.0.0'
   id 'org.unbroken-dome.helm' version '0.3.1'
   id 'org.unbroken-dome.helm-publish' version '0.3.1'
   id 'org.unbroken-dome.helm-releases' version '0.3.1'
+
+  id 'nebula.release' version '6.3.5'
+  id 'nebula.lint' version '9.3.2'
+  id 'nebula.maven-base-publish' version '8.1.0'
+
+  id 'se.patrikerdes.use-latest-versions' version '0.2.9'
+  id 'com.github.ben-manes.versions' version '0.21.0'
 }
 
 ext {
@@ -28,6 +36,7 @@ repositories {
 dependencies {
   implementation platform('org.springframework.cloud:spring-cloud-dependencies:Greenwich.SR1')
 	implementation 'org.springframework.cloud:spring-cloud-starter-gateway'
+  //implementation 'org.springframework.cloud:spring-cloud-starter-kubernetes'
 	implementation 'org.springframework.boot:spring-boot-starter-actuator'
 	implementation 'org.springframework.boot:spring-boot-starter-security'
 	implementation 'org.springframework.cloud:spring-cloud-starter-config'

@@ -15,6 +15,7 @@
  */
 package com.greglturnquist.learningspringboot.chat;
 
+import org.springframework.boot.autoconfigure.security.reactive.PathRequest;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.config.annotation.web.reactive.EnableWebFluxSecurity;
 import org.springframework.security.config.web.server.ServerHttpSecurity;
@@ -33,6 +34,7 @@ public class SecurityConfiguration {
   SecurityWebFilterChain springWebFilterChain(ServerHttpSecurity http) {
     return http
         .authorizeExchange()
+
         .pathMatchers("/actuator/*").permitAll()
         .pathMatchers("/**").authenticated()
         .and()

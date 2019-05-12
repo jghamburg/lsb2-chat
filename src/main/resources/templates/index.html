@@ -134,7 +134,7 @@
 				});
 
 				// Listen for new comments
-				var newComments = new WebSocket('ws://localhost:9999/topic/comments.new');
+				var newComments = new WebSocket('ws://lsb2-chat.local.svc.cluster.local/topic/comments.new');
 				newComments.onmessage = function(event) {
 					console.log('Received ' + event.data + '!');
 					var parsedMessage = JSON.parse(event.data);
@@ -147,7 +147,7 @@
 				}
 
 				<!-- tag::chat-2[] -->
-				var outboundChatMessages = new WebSocket('ws://localhost:9999/app/chatMessage.new');
+				var outboundChatMessages = new WebSocket('ws://lsb2-chat.local.svc.cluster.local/app/chatMessage.new');
 				// Post new chat messages
 				outboundChatMessages.onopen = function(event) {
 					document.getElementById('chatButton')
@@ -163,7 +163,7 @@
 
 				<!-- tag::chat-3[] -->
 				var inboundChatMessages =
-					new WebSocket('ws://localhost:9999/topic/chatMessage.new');
+					new WebSocket('ws://lsb2-chat.local.svc.cluster.local/topic/chatMessage.new');
 				// Listen for new chat messages
 				inboundChatMessages.onmessage = function (event) {
 					console.log('Received ' + event.data);

@@ -1,7 +1,7 @@
 image:
   repository: jghamburg/lsb2-chat
   tag: local
-  pullPolicy: IfNotPresent
+  pullPolicy: Always
 
 fullnameOverride: "lsb2-chat"
 
