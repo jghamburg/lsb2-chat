@@ -26,10 +26,10 @@ ext {
 }
 
 group = 'com.gregturnquist.learningspringboot'
-version = '0.0.1-SNAPSHOT'
+// version = '0.0.1-SNAPSHOT'
 
 repositories {
-	mavenCentral()
+	jcenter()
 	maven { url 'https://repo.spring.io/milestone' }
 }
 
@@ -40,7 +40,7 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-security'
 	implementation 'org.springframework.cloud:spring-cloud-starter-config'
   implementation 'org.springframework.cloud:spring-cloud-starter-kubernetes'
-	//implementation 'org.springframework.cloud:spring-cloud-starter-netflix-eureka-client'
+	implementation 'org.springframework.cloud:spring-cloud-starter-netflix-eureka-client'
 	implementation 'org.springframework.cloud:spring-cloud-starter-netflix-hystrix'
 	implementation 'org.springframework.boot:spring-boot-starter-webflux'
 	implementation 'org.springframework.boot:spring-boot-starter-data-mongodb-reactive'
@@ -62,8 +62,8 @@ lombok {
 	sha256 = ""
 }
 
-repositories {
-	jcenter()
+apply plugin: 'maven-publish'
+publishing {
 }
 
 bootJar {
