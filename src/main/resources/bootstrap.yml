@@ -1,6 +1,6 @@
 spring:
   application:
-    name: chat
+    name: lsb2-chat
   cloud:
     config:
       label: session
