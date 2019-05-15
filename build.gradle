@@ -22,8 +22,7 @@ plugins {
 
 ext {
 	set('activeSpringProfiles', 'local')
-//  set('chartRepoUrl', 'http://chartmuseum.local.svc.cluster.local/')
-  set('chartRepoUrl', 'http://127.0.0.1:8879')
+  set('chartRepoUrl', 'http://chartmuseum.local.svc.cluster.local/')
 }
 
 group = 'com.gregturnquist.learningspringboot'
@@ -96,10 +95,9 @@ helm {
 //    }
 //  }
   repositories {
-      museum {
-//          url = uri('http://chartmuseum.local.svc.cluster.local/')
-          url = uri(chartRepoUrl)
-      }
+     museum {
+         url = uri(chartRepoUrl)
+     }
   }
   // helm-release plugin config
   releases {
@@ -121,9 +119,9 @@ helm {
   // helm-publish plugin config
   publishing {
       repositories {
-          museum {
-              url = uri(chartRepoUrl)
-          }
+         museum {
+             url = uri(chartRepoUrl)
+         }
       }
   }  
 }
