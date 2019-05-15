@@ -22,7 +22,8 @@ plugins {
 
 ext {
 	set('activeSpringProfiles', 'local')
-  set('chartRepoUrl', 'http://chartmuseum.local.svc.cluster.local/')
+//  set('chartRepoUrl', 'http://chartmuseum.local.svc.cluster.local/')
+  set('chartRepoUrl', 'http://127.0.0.1:8879')
 }
 
 group = 'com.gregturnquist.learningspringboot'
