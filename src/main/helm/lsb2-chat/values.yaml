@@ -21,7 +21,7 @@ replicaCount: 1
 
 image:
   repository: jghamburg/lsb2-chat
-  tag: local
+  tag: "${imageTag}"
   pullPolicy: Always
 
 nameOverride: ""

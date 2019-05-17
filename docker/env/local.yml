@@ -6,8 +6,8 @@ services:
   lsb2-chat:
     labels:
       lsb2.template.description: "Chat Server for local environment"
-      lsb2.chat.version: "local"
-    image: "jghamburg/lsb2-chat:local"
+      lsb2.chat.version: $TAG
+    image: jghamburg/lsb2-chat:$TAG
     build:
       context: ../..
       dockerfile: ./docker/Dockerfile
