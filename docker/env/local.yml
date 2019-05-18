@@ -12,7 +12,7 @@ services:
       context: ../..
       dockerfile: ./docker/Dockerfile
       args:
-        JAR_FILE: ./build/libs/lsb2-chat.jar
+        JAR_FILE: ./build/libs/lsb2-chat-${TAG}.jar
     ports:
       - "9999:8080" # web port
       # - "49999:49999"

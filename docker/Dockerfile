@@ -14,6 +14,7 @@ ENV PATH="$PATH:$JAVA_HOME/bin"
 
 # Second stage, add only our custom jdk11 distro and our app
 FROM alpine:3.8
+ARG JAR_FILE
 COPY --from=packager /usr/lib/jvm/zulu-11-minimal /opt/jdk-11-minimal
 # create user with defined user-id and set rights to volume for user
 ENV JAVA_HOME=/opt/jdk-11-minimal
@@ -30,6 +31,6 @@ RUN adduser -D -u 1000 app && echo "app:ppa" | chpasswd && \
 WORKDIR /app
 # run rest of container with user app
 USER app
-COPY build/libs/*.jar /app/app.jar
+COPY $JAR_FILE /app/app.jar
 
 ENTRYPOINT /app/run.sh $PROFILE $JAVA_HEAP

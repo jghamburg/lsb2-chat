@@ -60,8 +60,8 @@ dependencies {
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 }
 
-sourceCompatibility = 11
-targetCompatibility = 11
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
 
 lombok {
 	version = '1.18.4'
@@ -78,6 +78,16 @@ bootJar {
   baseName = 'lsb2-chat'
 //  version = ''
   excludeDevtools = false
+}
+springBoot {
+  buildInfo {
+    properties {
+      additional = [
+        'a': 'alpha',
+        'b': 'bravo'
+      ]
+    }
+  }
 }
 
 helm {
@@ -119,8 +129,8 @@ helm {
           // pass values (like --set on the command line)
           values = [ 'rootUser.password': 'secret' ]
           // pass value files (like -f on the command line)
-          valueFiles.from "src/main/helm/values.yaml"
-          valueFiles.from "src/main/helm/values-${activeSpringProfiles}.yaml"
+          valueFiles.from "src/main/helm/lsb2-chat/values.yaml"
+          valueFiles.from "src/main/helm/lsb2-chat/values-${activeSpringProfiles}.yaml"
       }
   }
 
