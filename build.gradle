@@ -80,7 +80,7 @@ helm {
   filtering {
     // This value will be resolvable in all charts' YAML files as ${authorName}
     values.put 'authorName', 'Developer'
-    values.put 'imageTag', project.version.toString()
+    values.put 'image.tag', project.version.toString()
   }
   charts {
     'lsb2-chat' {
@@ -104,10 +104,10 @@ helm {
           dryRun = false
           wait = false
           // pass values (like --set on the command line)
-          values = [ 'rootUser.password': 'secret' ]
+          values = [ 'image.tag': project.version ]
           // pass value files (like -f on the command line)
-          valueFiles.from "src/main/helm/values.yaml"
-          valueFiles.from "src/main/helm/values-${activeSpringProfiles}.yaml"
+          valueFiles.from "src/main/helm/lsb2-chat/values.yaml"
+          valueFiles.from "src/main/helm/lsb2-chat/values-${activeSpringProfiles}.yaml"
       }
   }
 
