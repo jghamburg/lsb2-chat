@@ -13,10 +13,6 @@ plugins {
   id 'org.unbroken-dome.helm-publish' version '0.3.1'
   id 'org.unbroken-dome.helm-releases' version '0.3.1'
 
-  id 'nebula.release' version '6.3.5'
-  id 'nebula.lint' version '9.3.2'
-  id 'nebula.maven-base-publish' version '8.1.0'
-
   id 'se.patrikerdes.use-latest-versions' version '0.2.9'
   id 'com.github.ben-manes.versions' version '0.21.0'
 }
@@ -45,7 +41,6 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-actuator'
 	implementation 'org.springframework.boot:spring-boot-starter-security'
 	implementation 'org.springframework.cloud:spring-cloud-starter-config'
-  implementation 'org.springframework.cloud:spring-cloud-starter-kubernetes'
 	implementation 'org.springframework.cloud:spring-cloud-starter-netflix-eureka-client'
 	implementation 'org.springframework.cloud:spring-cloud-starter-netflix-hystrix'
 	implementation 'org.springframework.boot:spring-boot-starter-webflux'
@@ -66,12 +61,6 @@ targetCompatibility = 11
 lombok {
 	version = '1.18.4'
 	sha256 = ""
-}
-
-nebulaRelease {
-  releaseBranchPatterns = ["master", "HEAD", "(release(-|\\/))?\\d+(\\.\\d+)?\\.x, v?\\d+\\.\\d+\\.\\d+"] as Set
-  excludeBranchPatterns = [] as Set
-  shortenedBranchPattern = "(?:(?:bugfix|feature|hotfix|release)(?:-|\\/))?(.+)"
 }
 
 bootJar {
