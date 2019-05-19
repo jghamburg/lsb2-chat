@@ -13,6 +13,8 @@ plugins {
   id 'org.unbroken-dome.helm-publish' version '0.3.1'
   id 'org.unbroken-dome.helm-releases' version '0.3.1'
 
+  id 'de.gliderpilot.semantic-release' version '1.0.0'
+
   id 'se.patrikerdes.use-latest-versions' version '0.2.9'
   id 'com.github.ben-manes.versions' version '0.21.0'
 }
@@ -67,6 +69,13 @@ bootJar {
   baseName = 'lsb2-chat'
 //  version = ''
   excludeDevtools = false
+}
+
+project.ext.ghToken = project.hasProperty('ghToken') ? project.getProperty('ghToken') : System.getenv('GH_TOKEN') ?: null
+semanticRelease {
+    repo {
+        ghToken = project.ghToken
+    }
 }
 
 helm {
