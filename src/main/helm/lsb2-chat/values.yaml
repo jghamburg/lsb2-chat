@@ -9,12 +9,12 @@ app:
   eurekaserver:
     uri: 'http://user:password@lsb2-eureka-server/eureka/'
   rabbitmq:
-    host: local-rabbitmq
+    host: rabbitmq.default
     port: 5672
     username: guest
     password: guest
   mongodb:
-    host: local-mongo-server
+    host: mongo-server.default
     port: 27017
     dbname: lsb2db
 replicaCount: 1
@@ -63,3 +63,35 @@ nodeSelector: {}
 tolerations: []
 
 affinity: {}
+
+persistence:
+  enabled: true
+  ## A manually managed Persistent Volume and Claim
+  ## Requires persistence.enabled: true
+  ## If defined, PVC must be created manually before volume will be bound
+  ##
+  # existingClaim:
+
+  ## The path the volume will be mounted at, useful when using different
+  ## MongoDB images.
+  ##
+  mountPath: /app/git
+
+  ## The subdirectory of the volume to mount to, useful in dev environments
+  ## and one PV for multiple services.
+  ##
+  subPath: ""
+
+  ## Persistent Volume Storage Class
+  ## If defined, storageClassName: <storageClass>
+  ## If set to "-", storageClassName: "", which disables dynamic provisioning
+  ## If undefined (the default) or set to null, no storageClassName spec is
+  ##   set, choosing the default provisioner.  (gp2 on AWS, standard on
+  ##   GKE, AWS & OpenStack)
+  ##
+  # storageClass: "-"
+  accessModes:
+    - ReadWriteOnce
+  size: 1Gi
+  annotations: {}
+

@@ -21,10 +21,4 @@ services:
       PORT: 8080
       DEBUG_PORT: "49999"
 #      JAVA_REMOTE_DEBUGGING: "false"
-    networks:
-      - learn-ms-network
-
-networks:
-  learn-ms-network:
-    external: true
 
