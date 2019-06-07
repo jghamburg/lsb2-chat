@@ -1,22 +1,22 @@
 plugins {
 	id 'org.springframework.boot' version '2.1.5.RELEASE' apply true
-  id "io.spring.dependency-management" version "1.0.6.RELEASE"
+  id "io.spring.dependency-management" version "1.0.7.RELEASE"
   id 'java'
-	id 'io.franzbecker.gradle-lombok' version '2.0'
+	id 'io.franzbecker.gradle-lombok' version '3.0.0'
 	id 'idea'
 	id 'com.gorylenko.gradle-git-properties' version '2.0.0'
   
 	id 'com.avast.gradle.docker-compose' version '0.9.4'
-	id 'com.google.cloud.tools.jib' version '1.0.0'
+	id 'com.google.cloud.tools.jib' version '1.1.2'
 
   id 'org.unbroken-dome.helm' version '0.3.1'
   id 'org.unbroken-dome.helm-publish' version '0.3.1'
   id 'org.unbroken-dome.helm-releases' version '0.3.1'
 
-  id 'de.gliderpilot.semantic-release' version '1.4.0'
-
   id 'se.patrikerdes.use-latest-versions' version '0.2.9'
   id 'com.github.ben-manes.versions' version '0.21.0'
+
+  id 'de.gliderpilot.semantic-release' version '1.4.0'
 }
 
 ext {
