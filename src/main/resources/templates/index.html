@@ -115,7 +115,8 @@
 		<script th:inline="javascript">
 			/*<![CDATA[*/
 			(function() {
-				var webServiceUrl = 'ws://lsb2-chat.local.svc.cluster.local';
+				// var webServiceUrl = 'ws://lsb2-chat.local.svc.cluster.local';
+				var webServiceUrl = 'ws://localhost:9999';
 				// Send in new comments via an AJAX call
 				document.querySelectorAll('button.comment').forEach(function (button) {
 					button.addEventListener('click', function () {
