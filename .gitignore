@@ -6,3 +6,4 @@ node_modules/
 *.iws
 .gradletasknamecache
 out
+/node_modules

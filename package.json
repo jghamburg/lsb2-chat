@@ -1,14 +1,14 @@
 {
   "devDependencies": {
-    "@semantic-release/changelog": "^3.0.2",
-    "@semantic-release/commit-analyzer": "6.1.0",
-    "@semantic-release/git": "^7.0.8",
-    "@semantic-release/github": "5.2.10",
-    "@semantic-release/release-notes-generator": "7.1.4",
-    "commitizen": "3.1.1",
-    "cz-conventional-changelog": "2.1.0",
-    "gradle-semantic-release-plugin": "^1.1.0",
-    "semantic-release": "^15.13.12"
+    "@semantic-release/changelog": "3.0.4",
+    "@semantic-release/commit-analyzer": "6.3.0",
+    "@semantic-release/git": "7.0.16",
+    "@semantic-release/github": "5.4.3",
+    "@semantic-release/release-notes-generator": "7.3.0",
+    "commitizen": "4.0.3",
+    "cz-conventional-changelog": "3.0.2",
+    "gradle-semantic-release-plugin": "1.1.0",
+    "semantic-release": "15.13.24"
   },
   "scripts": {
     "semantic-release": "semantic-release",
@@ -33,7 +33,7 @@
     ]
   },
   "engines": {
-    "node": "^8.15"
+    "node": "^12.8.1"
   },
   "config": {
     "commitizen": {
