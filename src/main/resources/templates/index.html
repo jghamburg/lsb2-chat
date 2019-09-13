@@ -116,7 +116,7 @@
 			/*<![CDATA[*/
 			(function() {
 				// var webServiceUrl = 'ws://lsb2-chat.local.svc.cluster.local';
-				var webServiceUrl = 'ws://localhost:9999';
+				var webServiceUrl = 'ws://127.0.0.1:9999';
 				// Send in new comments via an AJAX call
 				document.querySelectorAll('button.comment').forEach(function (button) {
 					button.addEventListener('click', function () {
@@ -136,7 +136,7 @@
 				});
 
 				// Listen for new comments
-				var newComments = new WebSocket('ws://localhost:9999/topic/comments.new');
+				var newComments = new WebSocket('ws://127.0.0.1:9999/topic/comments.new');
 				newComments.onmessage = function(event) {
 					console.log('Received ' + event.data + '!');
 					var parsedMessage = JSON.parse(event.data);
@@ -149,7 +149,7 @@
 				}
 
 				<!-- tag::chat-2[] -->
-				var outboundChatMessages = new WebSocket('ws://localhost:9999/app/chatMessage.new');
+				var outboundChatMessages = new WebSocket('ws://127.0.0.1:9999/app/chatMessage.new');
 				// Post new chat messages
 				outboundChatMessages.onopen = function(event) {
 					document.getElementById('chatButton')
@@ -165,7 +165,7 @@
 
 				<!-- tag::chat-3[] -->
 				var inboundChatMessages =
-					new WebSocket('ws://localhost:9999/topic/chatMessage.new');
+					new WebSocket('ws://127.0.0.1:9999/topic/chatMessage.new');
 				// Listen for new chat messages
 				inboundChatMessages.onmessage = function (event) {
 					console.log('Received ' + event.data);
