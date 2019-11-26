@@ -32,7 +32,7 @@ abstract class AuthorizedWebSocketHandler
 	@Override
 	public final Mono<Void> handle(WebSocketSession session) {
 		return session.getHandshakeInfo().getPrincipal()
-			.filter(this::isAuthorized)
+//			.filter(this::isAuthorized)
 			.then(doHandle(session));
 	}
 
