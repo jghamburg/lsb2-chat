@@ -19,6 +19,13 @@ plugins {
   id 'maven-publish'
 }
 
+configurations {
+  developmentOnly
+  runtimeClasspath {
+    extendsFrom developmentOnly
+  }
+}
+
 ext {
 	set('activeSpringProfiles', 'local')
   set('tag', 'local')
@@ -33,6 +40,10 @@ repositories {
   maven { url 'https://repository.jboss.org/nexus/content/repositories/public/' }
 	maven { url 'https://repo.spring.io/milestone' }
 }
+configurations {
+  compile.exclude module: "spring-boot-starter-tomcat"
+  compile.exclude module: "spring-boot-starter-jetty"
+}
 
 dependencies {
   implementation enforcedPlatform('org.springframework.cloud:spring-cloud-dependencies:Greenwich.SR4')
@@ -46,11 +57,11 @@ dependencies {
   }
 	implementation 'org.springframework.boot:spring-boot-starter-data-mongodb-reactive'
 	implementation "org.springframework.boot:spring-boot-starter-thymeleaf"
-	runtimeOnly 'org.springframework.boot:spring-boot-devtools'
 	implementation 'org.springframework.cloud:spring-cloud-starter-stream-rabbit'
 	implementation 'org.springframework.cloud:spring-cloud-stream-reactive'
 	implementation 'org.springframework.session:spring-session-data-mongodb'
 	implementation 'io.micrometer:micrometer-core'
+  developmentOnly 'org.springframework.boot:spring-boot-devtools'
 
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 }
