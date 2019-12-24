@@ -1,0 +1,25 @@
+{
+  debug: true,
+  repositoryUrl: "https://github.com/jghamburg/lsb2-chat.git",
+  verifyConditions: ["@semantic-release/changelog", "@semantic-release/github"],
+  prepare: ["@semantic-release/changelog", "gradle-semantic-release-plugin", "@semantic-release/git"],
+  publish: [],
+  success: [],
+  fail: [],
+  plugins: [
+        "@semantic-release/commit-analyzer",
+        "@semantic-release/release-notes-generator",
+        "@semantic-release/changelog",
+        "gradle-semantic-release-plugin",
+        "@semantic-release/git",
+        [
+          "@semantic-release/github",
+          {
+            "assets": [
+              "gradle.properties",
+              "CHANGELOG.md"
+            ]
+          }
+        ]
+      ]
+}

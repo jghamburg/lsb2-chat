@@ -6,5 +6,4 @@ spring:
       label: session
       password: password
       uri: ${CONFIG_SERVER_URI:http://localhost:8888}
-appversion: @project.version@
 
