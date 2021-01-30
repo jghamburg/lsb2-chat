@@ -1,131 +1,126 @@
 plugins {
-	id 'org.springframework.boot' version '2.2.6.RELEASE'
-  id "io.spring.dependency-management" version "1.0.9.RELEASE"
-  id 'groovy'
-	id 'idea'
-  id 'io.franzbecker.gradle-lombok' version '3.3.0'
-	id 'com.gorylenko.gradle-git-properties' version '2.2.2'
+    id 'org.springframework.boot' version '2.4.2'
+    id "io.spring.dependency-management" version "1.0.11.RELEASE"
+    id 'groovy'
+    id 'idea'
+    id 'io.franzbecker.gradle-lombok' version '4.0.0'
+    id 'com.gorylenko.gradle-git-properties' version '2.2.4'
 
-	id 'com.palantir.docker' version '0.25.0'
-  id 'com.palantir.docker-run' version '0.25.0'
-  id 'com.avast.gradle.docker-compose' version '0.10.10'
-	id 'com.google.cloud.tools.jib' version '2.1.0'
+    id 'com.palantir.docker' version '0.25.0'
+    id 'com.palantir.docker-run' version '0.25.0'
 
-  id 'org.unbroken-dome.helm' version '0.4.1'
-  id 'org.unbroken-dome.helm-publish' version '0.4.1'
-  id 'org.unbroken-dome.helm-releases' version '0.4.1'
+    id 'com.avast.gradle.docker-compose' version '0.14.0'
+    id 'com.google.cloud.tools.jib' version '2.7.1'
+    id 'org.unbroken-dome.helm' version '1.4.0'
+    id 'org.unbroken-dome.helm-publish' version '1.4.0'
+    id 'org.unbroken-dome.helm-releases' version '1.4.0'
 
-  id 'se.patrikerdes.use-latest-versions' version '0.2.13'
-  id 'com.github.ben-manes.versions' version '0.28.0'
+    id 'se.patrikerdes.use-latest-versions' version '0.2.15'
+    id 'com.github.ben-manes.versions' version '0.36.0'
 
-  id 'maven-publish'
+    id 'maven-publish'
 }
 
 configurations {
-  developmentOnly
-  runtimeClasspath {
-    extendsFrom developmentOnly
-  }
+    developmentOnly
+    runtimeClasspath {
+        extendsFrom developmentOnly
+    }
 }
 
 ext {
-	activeSpringProfiles = 'local'
-  tag = 'local'
-  chartRepoUrl = 'http://chartmuseum.default.svc.cluster.local/'
-  springcloudversion = '2020-1.M1'
-  powermockVersion = '2.0.2'
-  spockversion = '2.0-M2-groovy-3.0'
-  spockReportsVersion = '1.7.1'
-  mockitoversion = '2.28.2'
-  groovyversion = '3.0.3'
-  allureVersion = '2.13.2'
-  togglzversion = '2.6.1.Final'
+    activeSpringProfiles = 'local'
+    tag = 'local'
+    chartRepoUrl = 'http://chartmuseum.default.svc.cluster.local/'
+    lombokVersion = '1.18.18'
+    springcloudVersion = '2020.0.1'
+    powermockVersion = '2.0.2'
+    spockVersion = '2.0-M4-groovy-3.0'
+    spockReportsVersion = '1.7.1'
+    mockitoVersion = '2.28.2'
+    groovyVersion = '3.0.7'
+    allureVersion = '2.13.2'
+    togglzversion = '2.6.1.Final'
 }
 
 group = 'com.gregturnquist.learningspringboot'
 
 repositories {
-	mavenCentral()
-  maven { url 'https://repository.jboss.org/nexus/content/repositories/public/' }
-	maven { url 'https://repo.spring.io/milestone' }
+    mavenCentral()
+    maven { url 'https://repository.jboss.org/nexus/content/repositories/public/' }
+    maven { url 'https://repo.spring.io/milestone' }
 }
 configurations {
-  compile.exclude module: "spring-boot-starter-tomcat"
-  compile.exclude module: "spring-boot-starter-jetty"
+    compile.exclude module: "spring-boot-starter-tomcat"
+    compile.exclude module: "spring-boot-starter-jetty"
 }
 
 dependencies {
-  implementation "org.codehaus.groovy:groovy-all:${groovyversion}"
-  implementation enforcedPlatform("org.springframework.cloud:spring-cloud-dependencies:${springcloudversion}")
-  implementation 'org.springframework.boot:spring-boot-starter-webflux'
-	implementation 'org.springframework.boot:spring-boot-starter-actuator'
-	implementation 'org.springframework.boot:spring-boot-starter-security'
-	implementation 'org.springframework.cloud:spring-cloud-starter-config'
-  implementation ('org.springframework.boot:spring-boot-starter-websocket'){
-    exclude group: 'org.springframework.boot', module: 'spring-boot-starter-web'
-  }
-	implementation 'org.springframework.boot:spring-boot-starter-data-mongodb-reactive'
-	implementation "org.springframework.boot:spring-boot-starter-thymeleaf"
-  implementation 'org.springframework.boot:spring-boot-starter-amqp'
-  implementation 'org.springframework.cloud:spring-cloud-starter-stream-rabbit'
-  implementation 'org.springframework.session:spring-session-data-mongodb'
-	implementation 'io.micrometer:micrometer-core'
-  developmentOnly 'org.springframework.boot:spring-boot-devtools'
+    compileOnly "org.projectlombok:lombok:${lombokVersion}"
+    annotationProcessor "org.projectlombok:lombok:${lombokVersion}"
+    implementation platform("org.springframework.cloud:spring-cloud-dependencies:${springcloudVersion}")
+    implementation 'org.springframework.boot:spring-boot-starter-webflux'
+    implementation 'org.springframework.boot:spring-boot-starter-actuator'
+    implementation 'org.springframework.boot:spring-boot-starter-security'
+    implementation 'org.springframework.cloud:spring-cloud-starter-config'
+    implementation('org.springframework.boot:spring-boot-starter-websocket') {
+        exclude group: 'org.springframework.boot', module: 'spring-boot-starter-web'
+    }
+    implementation 'org.springframework.boot:spring-boot-starter-data-mongodb-reactive'
+    implementation "org.springframework.boot:spring-boot-starter-thymeleaf"
+    implementation 'org.springframework.boot:spring-boot-starter-amqp'
+    implementation 'org.springframework.cloud:spring-cloud-starter-stream-rabbit'
+    implementation 'org.springframework.session:spring-session-data-mongodb'
+    implementation 'io.micrometer:micrometer-core'
+    developmentOnly 'org.springframework.boot:spring-boot-devtools'
 
-	testImplementation 'org.springframework.boot:spring-boot-starter-test'
-  // feature togglz
-  testImplementation "org.togglz:togglz-junit5:${togglzversion}"
-  testImplementation "org.togglz:togglz-junit:${togglzversion}"
-  // spock test framework
-  // Groovy
-  testImplementation "org.spockframework:spock-core:${spockversion}"
-  testImplementation "org.spockframework:spock-spring:${spockversion}"
-  testImplementation("com.athaydes:spock-reports:${spockReportsVersion}") {
-    transitive = false // this avoids affecting your version of Groovy/Spock
-  }
-  testImplementation 'com.blogspot.toomuchcoding:spock-subjects-collaborators-extension:1.2.2'
-  testRuntime 'cglib:cglib-nodep:3.3.0'
-  testRuntime 'org.objenesis:objenesis:3.1'
-  // allure test reporting
-  //testRuntimeOnly "com.squareup.retrofit2:converter-gson:${allureVersion}"
-  testRuntimeOnly "io.qameta.allure:allure-okhttp3:${allureVersion}"
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    // feature togglz
+    testImplementation "org.togglz:togglz-junit5:${togglzversion}"
+    testImplementation "org.togglz:togglz-junit:${togglzversion}"
+    testAnnotationProcessor "org.projectlombok:lombok:${lombokVersion}"
+    // spock test framework
+    // Groovy
+    implementation "org.codehaus.groovy:groovy:${groovyVersion}"
+    testImplementation platform("org.spockframework:spock-bom:${spockVersion}")
+    testImplementation ("org.spockframework:spock-core")
+    testImplementation ("org.spockframework:spock-spring"){
+        exclude group: 'org.codehaus.groovy'
+    }
+    testImplementation 'com.blogspot.toomuchcoding:spock-subjects-collaborators-extension:1.2.2'
+    // optional dependencies for using Spock
+    testImplementation "org.hamcrest:hamcrest-core:2.2"   // only necessary if Hamcrest matchers are used
+    testRuntimeOnly "net.bytebuddy:byte-buddy:1.10.10" // allows mocking of classes (in addition to interfaces)
+    testRuntimeOnly "org.objenesis:objenesis:3.1"      // allows mocking of classes without default constructor (together with ByteBuddy or CGLIB)
+    // allure test reporting
+    //testRuntimeOnly "com.squareup.retrofit2:converter-gson:${allureVersion}"
+    testRuntimeOnly "io.qameta.allure:allure-okhttp3:${allureVersion}"
 //  testRuntimeOnly "io.qameta.allure:allure-spock:${allureVersion}"
-  testRuntimeOnly "io.qameta.allure:allure-junit4:${allureVersion}"
-  testRuntimeOnly "io.qameta.allure:allure-junit5:${allureVersion}"
+    testRuntimeOnly "io.qameta.allure:allure-junit5:${allureVersion}"
 }
 
 sourceCompatibility = 11
 targetCompatibility = 11
 
 lombok {
-	version = '1.18.10'
-	sha256 = ""
+    version = "${lombokVersion}"
+    sha256 = ""
 }
 
 springBoot {
-  mainClassName = 'com.greglturnquist.learningspringboot.chat.LearningSpringBootChatApplication'
-  buildInfo {
-    properties {
-      artifact = "${rootProject.name}"
-      group = "${project.group}"
-      name = "${rootProject.name}"
-      version = "${project.version}"
+    mainClassName = 'com.greglturnquist.learningspringboot.chat.LearningSpringBootChatApplication'
+    buildInfo {
+        properties {
+            artifact = "${rootProject.name}"
+            group = "${project.group}"
+            name = "${rootProject.name}"
+            version = "${project.version}"
+        }
     }
-  }
 }
 bootJar {
-  mainClassName = 'com.greglturnquist.learningspringboot.chat.LearningSpringBootChatApplication'
-  baseName = 'lsb2-chat'
-  excludeDevtools = true
-  archiveName = 'app.jar'
-  manifest {
-    attributes 'Implementation-Title': 'OBC Brandshopupdater Backend',
-        'Implementation-Version': version,
-        'Built-By': System.getProperty('user.name'),
-        'Built-Date': new Date(),
-        'Built-JDK': System.getProperty('java.version'),
-        'Built-Gradle': gradle.gradleVersion
-  }
+    archiveBaseName = 'lsb2-chat'
+    excludeDevtools = false
 }
 
 publishing {
@@ -137,103 +132,112 @@ publishing {
     }
 }
 
-helm {
-  // basic helm plugin config
-  home = file("${project.buildDir}/helm/home")
-  outputDir = file("${project.buildDir}/helm")
-  // The global lint configuration applies to all charts
-  lint {
-      // treat linter warnings as errors (failing the build)
-      strict = false
-      enabled = true
-  }
-  filtering {
-    // This value will be resolvable in all charts' YAML files as ${authorName}
-    values.put 'authorName', 'Developer'
-    values.put 'image.tag', project.version.toString()
-  }
-  charts {
-    'lsb2-chat' {
-        chartName = project.name
-        chartVersion = project.version.toString()
-        sourceDir = file('src/main/helm/lsb2-chat')
+tasks.jib.dependsOn tasks.check
+jib {
+    from {
+        image = 'gcr.io/distroless/java-debian10'
     }
-  }
-  repositories {
-     museum {
-         url = uri(chartRepoUrl)
-     }
-  }
-  // helm-release plugin config
-  releases {
-      'lsb2-chat' {
-          from charts.'lsb2-chat'
-          namespace = 'local'
-          replace = false
-          purge = true
-          dryRun = false
-          wait = false
-          // pass values (like --set on the command line)
-          values = [ 'image.tag': project.version ]
-          // pass value files (like -f on the command line)
-          valueFiles.from "src/main/helm/lsb2-chat/values.yaml"
-          valueFiles.from "src/main/helm/lsb2-chat/values-${activeSpringProfiles}.yaml"
-      }
-  }
+    to {
+        image = 'jghamburg/lsb2-comments'
+        tags = ["latest", project.version]
+        credHelper = 'osxkeychain'
+    }
+    extraDirectories {
+        paths = file('./ssl')
+    }
+    container {
+        jvmFlags = ['-Djava.security.egd=file:/dev/./urandom', '-Xms256m', '-Xdebug']
+        mainClass = 'com.greglturnquist.learningspringboot.LearningSpringBootChatApplication'
+        args = []
+        ports = ['8080']
+        format = 'OCI'
+    }
+}
+helm {
+    // The global lint configuration applies to all charts
+    lint {
+        // treat linter warnings as errors (failing the build)
+        strict = true
+    }
 
-  // helm-publish plugin config
-  publishing {
-      repositories {
-         museum {
-             url = uri(chartRepoUrl)
-         }
-      }
-  }
+    publishing {
+        repositories {
+            chartMuseum('localcharts') {
+                url = uri('http://chartmuseum-chartmuseum.default.svc.cluster.local:8080')
+            }
+        }
+    }
+
+    filtering {
+        values.put 'imageRepository', jib.to.image
+        values.put 'imageTag', jib.to.tags.first()
+        values.put 'appVersion', "${project.version}"
+    }
+
+    charts {
+        main {
+            chartName = project.name
+            chartVersion = project.version.toString()
+            sourceDir = file('src/main/helm/lsb2-chat')
+        }
+    }
+
+    releases {
+
+        chat {
+            valuesDir 'src/main/helm/lsb2-chat'
+            forTarget('local') {
+                from chart('main')
+                installDependsOn 'jibDockerBuild'
+                values.put 'imageTag', 'latest'
+                values.put 'appVersion', "${project.version}"
+            }
+            forTarget('nonlive') {
+                from chart('main')
+                installDependsOn 'jib'
+            }
+        }
+    }
+    releaseTargets {
+        local {
+//            kubeContext = 'docker-for-desktop'
+        }
+        nonlive {
+//            kubeContext = 'aws'
+//            atomic = true
+        }
+    }
+
 }
 /*
  * docker-compose plugin configuration.
  * Details on https://github.com/avast/gradle-docker-compose-plugin
  */
 dockerCompose {
-  useComposeFiles = ['docker/env/local.yml'] // like 'docker-compose -f <file>'; default is empty
-  buildBeforeUp = true // performs 'docker-compose build' before calling the 'up' command; default is true
+    useComposeFiles = ['docker/env/local.yml'] // like 'docker-compose -f <file>'; default is empty
+    buildBeforeUp = true // performs 'docker-compose build' before calling the 'up' command; default is true
 
-  waitForTcpPorts = true // turns off the waiting for exposed TCP ports opening
-  captureContainersOutput = true // if true, prints output of all containers to Gradle output - very useful for debugging; default is false
+    waitForTcpPorts = true // turns off the waiting for exposed TCP ports opening
+    captureContainersOutput = true
+    // if true, prints output of all containers to Gradle output - very useful for debugging; default is false
 
-  stopContainers = true // doesn't call `docker-compose down` - see below the paragraph about reconnecting
-  removeContainers = true
-  removeOrphans = false // removes containers for services not defined in the Compose file
+    stopContainers = true // doesn't call `docker-compose down` - see below the paragraph about reconnecting
+    removeContainers = true
+    removeOrphans = false // removes containers for services not defined in the Compose file
 
-  environment.put 'TAG', version
+    environment.put 'TAG', version
 }
 composeBuild.dependsOn bootJar
 composeUp.dependsOn composeBuild
 composePush.dependsOn composeBuild
 
-jib {
-  from {
-    image = 'azul/zulu-openjdk-alpine:11.0.6'
-  }
-  to {
-    image = 'jghamburg/lsb2-chat:local'
-//    credHelper = 'osxkeychain'
-  }
-  container {
-    jvmFlags = ['-Djava.security.egd=file:/dev/./urandom', '-Xms512m', '-Xdebug', "-Dspring.profiles.active=local"]
-    mainClass = 'com.greglturnquist.learningspringboot.chat.LearningSpringBootChatApplication'
-    args = []
-    ports = ['8080']
-  }
-}
-
-dockerRun{
-  name 'semantic-release'
-  image 'jghamburg/git-semantic-release'
-  volumes "${projectDir}": '/app'
-  ports '7080:5000'
-  daemonize false
-  clean true
-  command 'semantic-release', '-b', 'master', '--no-ci'
-  env 'GH_TOKEN': "${System.env.GH_TOKEN}", 'GIT_CREDENTIALS': "${System.env.GIT_CREDENTIALS}"
+dockerRun {
+    name 'semantic-release'
+    image 'jghamburg/git-semantic-release'
+    volumes "${projectDir}": '/app'
+    ports '7080:5000'
+    daemonize false
+    clean true
+    command 'semantic-release', '-b', 'master', '--no-ci'
+    env 'GH_TOKEN': "${System.env.GH_TOKEN}", 'GIT_CREDENTIALS': "${System.env.GIT_CREDENTIALS}"
 }
