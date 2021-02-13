@@ -29,7 +29,6 @@ configurations {
 }
 
 ext {
-    activeSpringProfiles = 'local'
     tag = 'local'
     chartRepoUrl = 'http://chartmuseum.default.svc.cluster.local/'
     lombokVersion = '1.18.18'
@@ -48,7 +47,6 @@ group = 'com.gregturnquist.learningspringboot'
 repositories {
     mavenCentral()
     maven { url 'https://repository.jboss.org/nexus/content/repositories/public/' }
-    maven { url 'https://repo.spring.io/milestone' }
 }
 configurations {
     compile.exclude module: "spring-boot-starter-tomcat"
@@ -67,8 +65,11 @@ dependencies {
         exclude group: 'org.springframework.boot', module: 'spring-boot-starter-web'
     }
     implementation 'org.springframework.boot:spring-boot-starter-data-mongodb-reactive'
+    implementation 'org.mongodb:mongodb-driver-sync'
     implementation "org.springframework.boot:spring-boot-starter-thymeleaf"
     implementation 'org.springframework.boot:spring-boot-starter-amqp'
+    implementation 'org.springframework.cloud:spring-cloud-starter-bootstrap'
+    implementation 'org.springframework.cloud:spring-cloud-starter-config'
     implementation 'org.springframework.cloud:spring-cloud-starter-stream-rabbit'
     implementation 'org.springframework.session:spring-session-data-mongodb'
     implementation 'io.micrometer:micrometer-core'
@@ -118,6 +119,14 @@ springBoot {
         }
     }
 }
+
+bootRun {
+    jvmArgs = [
+            "-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=5025",
+            "-Dspring.profiles.active=default",
+    ]
+}
+
 bootJar {
     archiveBaseName = 'lsb2-chat'
     excludeDevtools = false
@@ -135,7 +144,7 @@ publishing {
 tasks.jib.dependsOn tasks.check
 jib {
     from {
-        image = 'gcr.io/distroless/java-debian10'
+        image = 'gcr.io/distroless/java:11'
     }
     to {
         image = 'jghamburg/lsb2-comments'
